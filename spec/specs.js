@@ -1,13 +1,9 @@
-describe('Contact', function() {
-  it("creates a new contact with the given specifications", function() {
-    var testContact = new Contact("Rita","Moreno");
-    expect(testContact.firstName).to.equal("Rita");
-    expect(testContact.lastName).to.equal("Moreno");
-    expect(testContact.addresses).to.eql([]);
-  });
-});
+describe('Player', function() {
+  it("it returns a player object with name and score of 0", function() {
+    var testPlayer = new Player("Mad Max");
 
-it("adds the fullName method to all contacts", function() {
-    var testContact = new Contact("Sherlock","Holmes");
-    expect(testContact.fullName()).to.equal("Sherlock Holmes");
+    expect(testPlayer.name).to.equal("Mad Max");
+    expect(testPlayer.score).to.equal(0);
+
+  });
 });

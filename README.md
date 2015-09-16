@@ -1,13 +1,13 @@
-# _Address Book_
-## _9/13/2015_
-### By Charles Moss
+# _Pig Dice_
+## _A dice game where players play to 100 points, 9/16/2015_
+### By Charles Moss & Mike Chastain
 ## Description
-_User enters a sadness to convert. Output is converted happiness._
+_to do_
 
 ## Demo
 
 ## Setup
-_Clone and open index.html in your browser._  
+_Clone and open index.html in your browser. To see tests open spec_runner.html in your browers._  
 
 ## Technologies Used
 _This project makes use of: [Mocha](https://mochajs.org/), and [Chai](http://chaijs.com/) as testing-frameworks. And has a dependency for jQuery._
