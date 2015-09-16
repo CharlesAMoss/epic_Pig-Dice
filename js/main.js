@@ -1,14 +1,14 @@
-function Player(name){
-  this.name = name;
-  this.score = 0;
+function Player(name) {
+    this.name = name;
+    this.score = 0;
 
 }
 
-Player.prototype.joinGame = function(gameTojoin){
+Player.prototype.joinGame = function(gameTojoin) {
     gameTojoin.players.push(this);
 }
 
-function Game(){
+function Game() {
     this.players = [];
     this.maxPlayers = 2;
     this.currentPlayer = 0;
@@ -19,24 +19,23 @@ function Turn() {
     this.turnScore = 0;
 }
 
-Turn.prototype.roll = function(){
-    return Math.floor((Math.random()*6)+1);
+Turn.prototype.roll = function() {
+    return Math.floor((Math.random() * 6) + 1);
 }
 
-Turn.prototype.update = function(rollValue){
+Turn.prototype.update = function(rollValue) {
     if (rollValue === 1) {
         this.turnScore = 0;
-         this.hold();
-         }
-    else {
+    //    this.hold();
+    } else {
         this.turnScore += rollValue;
     }
 
 }
 
-Turn.prototype.hold = function(){
-    // add turn_score to current_player.score
-    // set turn_score to 0
-    // iterate up numberOfTurns
-    // run this.next()
+Turn.prototype.hold = function(player) {
+    player.score += this.turnScore;
+    this.turnScore = 0;
+    this.numberOfTurns += 1;
+    //this.next()
 }

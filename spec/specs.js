@@ -56,6 +56,9 @@ describe('Turn', function() {
     });
 
     it("turn.update reduces turnScore to 0 if rollValue is 1", function() {
+        var testPlayer = new Player("Mad Max");
+        var testPlayer2 = new Player("Rad Rex");
+        var testGame = new Game();
         var testTurn = new Turn();
         testTurn.turnScore = 6;
         testTurn.update(1);
@@ -70,6 +73,24 @@ describe('Turn', function() {
         var number = testTurn.turnScore;
 
         expect(number).to.equal(4);
+    });
+
+
+    it("adds turnScore to currentPlayer score", function() {
+        var testPlayer = new Player("Mad Max");
+        var testPlayer2 = new Player("Rad Rex");
+        testPlayer2.score = 5;
+        var testGame = new Game();
+        var testTurn = new Turn();
+        testTurn.turnScore = 2;
+        testTurn.hold();
+
+        console.log(testGame.currentPlayer);
+
+
+        var number = testPlayer2.score;
+
+        expect(number).to.equal(7);
     });
 
 
