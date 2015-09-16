@@ -83,9 +83,9 @@ describe('Turn', function() {
         var testGame = new Game();
         var testTurn = new Turn();
         testTurn.turnScore = 2;
-        testTurn.hold();
+        testTurn.hold(testPlayer2);
 
-        console.log(testGame.currentPlayer);
+
 
 
         var number = testPlayer2.score;
