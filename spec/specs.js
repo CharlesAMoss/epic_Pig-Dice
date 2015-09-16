@@ -39,3 +39,13 @@ describe('Game', function() {
     });
 
 });
+
+describe('Turn', function() {
+    it("tests turn's properties a set at 0", function() {
+        var testTurn = new Turn();
+
+        expect(testTurn.numberOfTurns).to.equal(0);
+        expect(testTurn.turnScore).to.equal(0);
+    });
+
+});

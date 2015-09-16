@@ -35,5 +35,8 @@ Turn.prototype.update = function(rollValue){
 }
 
 Turn.prototype.hold = function(){
-
+    // add turn_score to current_player.score
+    // set turn_score to 0
+    // iterate up numberOfTurns
+    // run this.next()
 }
