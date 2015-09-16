@@ -24,7 +24,7 @@ Turn.prototype.roll = function(){
 }
 
 Turn.prototype.update = function(rollValue){
-    if (rollValue  = 1) {
+    if (rollValue === 1) {
         this.turnScore = 0;
          this.hold();
          }

@@ -48,4 +48,29 @@ describe('Turn', function() {
         expect(testTurn.turnScore).to.equal(0);
     });
 
+    it("turn.roll returns a number from 1 to 6", function() {
+        var testTurn = new Turn();
+        var number = testTurn.roll();
+
+        expect(number).to.be.within(1,6);
+    });
+
+    it("turn.update reduces turnScore to 0 if rollValue is 1", function() {
+        var testTurn = new Turn();
+        testTurn.turnScore = 6;
+        testTurn.update(1);
+        var number = testTurn.turnScore;
+
+        expect(number).to.equal(0);
+    });
+
+    it("adds rollValue to turnScore if rollValue is not 1", function() {
+        var testTurn = new Turn();
+        testTurn.update(4);
+        var number = testTurn.turnScore;
+
+        expect(number).to.equal(4);
+    });
+
+
 });

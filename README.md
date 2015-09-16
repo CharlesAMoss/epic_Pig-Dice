@@ -14,7 +14,9 @@ _This project makes use of: [Mocha](https://mochajs.org/), and [Chai](http://cha
 
 ## To Do
 
-## Aside
+## Notes
+
+styled prompt [sweetalert](http://t4t5.github.io/sweetalert/)
 
 ### Legal
 Copyright (c) 2015 Charles A Moss
