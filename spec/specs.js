@@ -28,10 +28,6 @@ describe('Player', function() {
         expect(testGame.players.length).to.equal(testGame.maxPlayers);
 
     });
-
-
-
-
 });
 
 describe('Game', function() {
