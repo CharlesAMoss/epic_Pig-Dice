@@ -23,10 +23,10 @@ Turn.prototype.roll = function() {
     return Math.floor((Math.random() * 6) + 1) | 0;
 }
 
-Turn.prototype.update = function(rollValue) {
+Turn.prototype.update = function(rollValue, game) {
     if (rollValue === 1) {
         this.turnScore = 0;
-        this.hold();
+        this.next(game)
     } else {
         this.turnScore += rollValue;
     }
@@ -35,19 +35,25 @@ Turn.prototype.update = function(rollValue) {
 
 Turn.prototype.hold = function(player) {
     player.score += this.turnScore;
-    this.turnScore = 0;
-    this.numberOfTurns += 1;
-    //this.next()
 }
 
-Turn.prototype.next = function(){
+Turn.prototype.next = function(game){
 
+        this.turnScore = 0;
+        this.numberOfTurns += 1;
+console.log("Inside of next function");
+console.log(game.currentPlayer);
+    if (game.currentPlayer == ((game.players.length) -1) ) {
+        game.currentPlayer = 0;
+    }
+    else{game.currentPlayer += 1;}
 }
-
+//global vars
+//var game = new Game();
 
 $(document).ready(function(){
 
-    var game = new Game();
+    //var game = new Game();
 
 
 

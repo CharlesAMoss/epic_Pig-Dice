@@ -52,16 +52,21 @@ describe('Turn', function() {
         var testTurn = new Turn();
         var number = testTurn.roll();
 
-        expect(number).to.be.within(1,6);
+        expect(number).to.be.within(1, 6);
     });
 
     it("turn.update reduces turnScore to 0 if rollValue is 1", function() {
+
         var testPlayer = new Player("Mad Max");
         var testPlayer2 = new Player("Rad Rex");
         var testGame = new Game();
+        testPlayer.joinGame(testGame);
+        testPlayer2.joinGame(testGame);
+
         var testTurn = new Turn();
         testTurn.turnScore = 6;
-        testTurn.update(1);
+        testTurn.update(1,testGame);
+
         var number = testTurn.turnScore;
 
         expect(number).to.equal(0);
@@ -82,7 +87,7 @@ describe('Turn', function() {
 
         var testGame = new Game();
         testPlayer.joinGame(testGame);
-        testPlayer2.joinGame(testGame);//player 2 joins game
+        testPlayer2.joinGame(testGame); //player 2 joins game
         testGame.currentPlayer = 1; //set currentplayer to testPlayer2
         var testTurn = new Turn();
         testPlayer2.score = 5;
@@ -92,12 +97,50 @@ describe('Turn', function() {
         testTurn.hold(currentPlayer);
         var number = testPlayer2.score;
 
-
-
-
-
         expect(number).to.equal(7);
     });
 
+    it("changes the players turn to the next player", function() {
+        var testPlayer = new Player("Mad Max");
+        var testPlayer2 = new Player("Rad Rex");
+        var game = new Game();
+
+        testPlayer.joinGame(game);
+        testPlayer2.joinGame(game); //player 2 joins game
+
+        var testTurn = new Turn();
+        testTurn.next(game);
+        var currentPlayer = game.players[game.currentPlayer];
+
+
+        expect(game.currentPlayer).to.equal(1);
+    });
+
+    it("test if feed in currentplayer outside of players array length", function() {
+        var testPlayer = new Player("Mad Max");
+        var testPlayer2 = new Player("Rad Rex");
+        var game = new Game();
+
+        testPlayer.joinGame(game);
+        testPlayer2.joinGame(game); //player 2 joins game
+
+        var testTurn = new Turn();
+console.log((game.players.length)-1);
+console.log("in spec");
+console.log(game.currentPlayer);
+        testTurn.next(game);
+console.log("in spec");
+console.log(game.currentPlayer);
+console.log("in spec");
+        testTurn.next(game);
+console.log(game.currentPlayer);
+console.log("in spec");
+       testTurn.next(game);
+
+    //    var currentPlayer = game.players[game.currentPlayer];
+
+
+        expect(game.currentPlayer).to.equal(1);
+    });
 
 });
