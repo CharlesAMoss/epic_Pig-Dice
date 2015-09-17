@@ -20,13 +20,13 @@ function Turn() {
 }
 
 Turn.prototype.roll = function() {
-    return Math.floor((Math.random() * 6) + 1);
+    return Math.floor((Math.random() * 6) + 1) | 0;
 }
 
 Turn.prototype.update = function(rollValue) {
     if (rollValue === 1) {
         this.turnScore = 0;
-    //    this.hold();
+        this.hold();
     } else {
         this.turnScore += rollValue;
     }
@@ -39,3 +39,17 @@ Turn.prototype.hold = function(player) {
     this.numberOfTurns += 1;
     //this.next()
 }
+
+Turn.prototype.next = function(){
+
+}
+
+
+$(document).ready(function(){
+
+    var game = new Game();
+
+
+
+
+});

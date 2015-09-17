@@ -79,16 +79,22 @@ describe('Turn', function() {
     it("adds turnScore to currentPlayer score", function() {
         var testPlayer = new Player("Mad Max");
         var testPlayer2 = new Player("Rad Rex");
-        testPlayer2.score = 5;
+
         var testGame = new Game();
+        testPlayer.joinGame(testGame);
+        testPlayer2.joinGame(testGame);//player 2 joins game
+        testGame.currentPlayer = 1; //set currentplayer to testPlayer2
         var testTurn = new Turn();
+        testPlayer2.score = 5;
         testTurn.turnScore = 2;
-        testTurn.hold(testPlayer2);
-
-
-
-
+        var currentPlayer = testGame.players[testGame.currentPlayer];
+        console.log(currentPlayer);
+        testTurn.hold(currentPlayer);
         var number = testPlayer2.score;
+
+
+
+
 
         expect(number).to.equal(7);
     });
