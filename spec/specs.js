@@ -38,9 +38,6 @@ describe('Game', function() {
 
     });
 
-});
-
-describe('Turn', function() {
     it("tests turn's properties a set at 0", function() {
         var testTurn = new Turn();
 
@@ -64,18 +61,19 @@ describe('Turn', function() {
         testPlayer2.joinGame(testGame);
 
         var testTurn = new Turn();
-        testTurn.turnScore = 6;
-        testTurn.update(1,testGame);
+        testGame.turnScore = 6;
+        testGame.update(1,testGame);
 
-        var number = testTurn.turnScore;
+        var number = testGame.turnScore;
 
         expect(number).to.equal(0);
     });
 
     it("adds rollValue to turnScore if rollValue is not 1", function() {
-        var testTurn = new Turn();
-        testTurn.update(4);
-        var number = testTurn.turnScore;
+        var testGame = new Game();
+
+        testGame.update(4);
+        var number = testGame.turn.turnScore;
 
         expect(number).to.equal(4);
     });
@@ -108,10 +106,9 @@ describe('Turn', function() {
         testPlayer.joinGame(game);
         testPlayer2.joinGame(game); //player 2 joins game
 
-        var testTurn = new Turn();
-        testTurn.next(game);
-        var currentPlayer = game.players[game.currentPlayer];
 
+        game.next();
+        var currentPlayer = game.players[game.currentPlayer];
 
         expect(game.currentPlayer).to.equal(1);
     });
@@ -124,23 +121,51 @@ describe('Turn', function() {
         testPlayer.joinGame(game);
         testPlayer2.joinGame(game); //player 2 joins game
 
-        var testTurn = new Turn();
-console.log((game.players.length)-1);
-console.log("in spec");
-console.log(game.currentPlayer);
-        testTurn.next(game);
-console.log("in spec");
-console.log(game.currentPlayer);
-console.log("in spec");
-        testTurn.next(game);
-console.log(game.currentPlayer);
-console.log("in spec");
-       testTurn.next(game);
+
+
+        game.next();
+        game.next();
+        game.next();
 
     //    var currentPlayer = game.players[game.currentPlayer];
 
 
         expect(game.currentPlayer).to.equal(1);
+    });
+
+    it("can win game score is 100 or greater", function() {
+        var testPlayer = new Player("Mad Max");
+        var testPlayer2 = new Player("Rad Rex");
+        var game = new Game();
+
+        testPlayer.joinGame(game);
+        testPlayer2.joinGame(game); //player 2 joins game
+
+        testPlayer2.score = 95;
+        game.currentPlayer = 1;//the second player
+        game.update(5);
+        game.turn.hold(game.players[game.currentPlayer]);
+        var gn = game.next();
+        var expected = "Rad Rex wins with a total of 100 points!"
+
+        expect(gn).to.equal(expected);
+    });
+
+    it("returns the next turn statement with player name", function() {
+        var testPlayer = new Player("Mad Max");
+        var testPlayer2 = new Player("Rad Rex");
+        var game = new Game();
+
+        testPlayer.joinGame(game);
+        testPlayer2.joinGame(game); //player 2 joins game
+
+        testPlayer2.score = 95;
+        game.currentPlayer = 1;//the second player
+        game.update(4);
+        game.turn.hold(game.players[game.currentPlayer]);
+        var gn = game.next();
+
+        expect(gn).to.equal("Mad Max's turn!");
     });
 
 });

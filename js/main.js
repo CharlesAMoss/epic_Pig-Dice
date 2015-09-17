@@ -12,6 +12,44 @@ function Game() {
     this.players = [];
     this.maxPlayers = 2;
     this.currentPlayer = 0;
+    this.turn = new Turn();
+
+}
+
+Game.prototype.update = function(rollValue) {
+    if (rollValue === 1) {
+        this.turn.turnScore = 0;
+        this.next()
+    } else {
+        this.turn.turnScore += rollValue;
+    }
+
+}
+
+Game.prototype.next = function() {
+
+    if (this.players[this.currentPlayer].score >= 100) {
+        return this.gameOver();
+    }
+
+    this.turnScore = 0;
+    this.numberOfTurns += 1;
+
+    if (this.currentPlayer == ((this.players.length) - 1)) {
+        this.currentPlayer = 0;
+        return this.players[this.currentPlayer].name + "'s turn!";
+    } else {
+        this.currentPlayer += 1;
+        return this.players[this.currentPlayer].name + "'s turn!";
+    }
+
+}
+
+Game.prototype.gameOver = function() {
+
+    var winner = this.players[this.currentPlayer]
+    return winner.name + " wins with a total of " + winner.score + " points!";
+
 }
 
 function Turn() {
@@ -23,35 +61,11 @@ Turn.prototype.roll = function() {
     return Math.floor((Math.random() * 6) + 1) | 0;
 }
 
-Turn.prototype.update = function(rollValue, game) {
-    if (rollValue === 1) {
-        this.turnScore = 0;
-        this.next(game)
-    } else {
-        this.turnScore += rollValue;
-    }
-
-}
-
 Turn.prototype.hold = function(player) {
     player.score += this.turnScore;
 }
 
-Turn.prototype.next = function(game){
-
-        this.turnScore = 0;
-        this.numberOfTurns += 1;
-console.log("Inside of next function");
-console.log(game.currentPlayer);
-    if (game.currentPlayer == ((game.players.length) -1) ) {
-        game.currentPlayer = 0;
-    }
-    else{game.currentPlayer += 1;}
-}
-//global vars
-//var game = new Game();
-
-$(document).ready(function(){
+$(document).ready(function() {
 
     //var game = new Game();
 
