@@ -39,8 +39,10 @@ Game.prototype.next = function() {
         this.currentPlayer = 0;
         return this.players[this.currentPlayer].name + "'s turn!";
     } else {
+console.log(this.players[this.currentPlayer].name + "'s turn!");
         this.currentPlayer += 1;
         return this.players[this.currentPlayer].name + "'s turn!";
+
     }
 
 }
@@ -63,11 +65,60 @@ Turn.prototype.roll = function() {
 
 Turn.prototype.hold = function(player) {
     player.score += this.turnScore;
+    console.log(this.turn)
 }
+
+
+var game = new Game();
+
+function updateUi(){
+    $("#whoTurn").text(game.players[game.currentPlayer].name);
+    $("#player_info ul").empty();
+    for ( var player of game.players ) {
+        $("#player_info ul").append('<li>' +  player.name + ' ' + player.score + '</li>');
+    }
+
+
+
+}
+
+    //ux
+
+    $('#roll').click(function(){
+
+        console.log("roll button clicked");
+        var thisRoll = game.turn.roll();
+
+        game.update(thisRoll);
+        updateUi();
+    });
+
+    $('#hold').click(function(){
+
+console.log("hold button clicked");
+        game.turn.hold(game.players[game.currentPlayer]);
+        game.update();
+        game.next();
+        updateUi();
+    });
 
 $(document).ready(function() {
 
-    //var game = new Game();
+
+
+    while (game.players.length < game.maxPlayers) {
+        var player_name = prompt ("Who wants to play?");
+        var player = new Player(player_name);
+        player.joinGame(game);
+    }
+
+    game.next();
+    updateUi();
+
+
+
+
+
 
 
 

@@ -121,8 +121,6 @@ describe('Game', function() {
         testPlayer.joinGame(game);
         testPlayer2.joinGame(game); //player 2 joins game
 
-
-
         game.next();
         game.next();
         game.next();
